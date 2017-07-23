@@ -21,6 +21,21 @@ function initMap() {
   trkttdi.addListener('click', function(event) {
     showInfo(event, 'trkttdi');
   });
+
+  // Inits jlnDatukSulaiman
+  var jlnDatukSulaiman = new google.maps.Polygon({
+    paths: jlnDatukSulaimanCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 3,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35
+  });
+
+  jlnDatukSulaiman.setMap(map);
+  jlnDatukSulaiman.addListener('click', function(event) {
+    showInfo(event, 'jlnDatukSulaiman');
+  });
 }
 
 // Get modal content data
@@ -34,7 +49,14 @@ function showInfo(event, location) {
   modal.setContent(getContent(location));
 
   // Sets footer content
-  modal.setFooterContent('<a class="tingle-btn tingle-btn--danger tingle-btn--pull-right" href="' + petition[location] + '" target="_blank">TAKE ACTION</a><a class="tingle-btn tingle-btn--primary tingle-btn--pull-right" href="' + sites[location] + '" target="_blank">MORE INFO</a>');
+  modal.setFooterContent(`
+    <a class="tingle-btn tingle-btn--danger tingle-btn--pull-right" href="${petition[location]}" target="_blank">
+      TAKE ACTION
+    </a>
+    <a class="tingle-btn tingle-btn--primary tingle-btn--pull-right" href="${sites[location]}" target="_blank">
+      MORE INFO
+    </a>
+  `);
 
   // Opens modal
   modal.open();
